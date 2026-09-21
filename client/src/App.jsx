@@ -1,3 +1,4 @@
+import './App.css';
 import { useState, useEffect } from 'react';
 
 function App() {
@@ -38,7 +39,7 @@ function App() {
   }
 
   return (
-    <div>
+    <div className = "app-container">
       <h1>My Recipe Box</h1>
 
       <form onSubmit={handleSubmit}>
@@ -71,7 +72,7 @@ function App() {
       <hr />
 
       {recipes.map(recipe => (
-        <div key={recipe.id}>
+        <div key={recipe.id} className = "recipe-card">
           <h2>{recipe.title}</h2>
           <p>{recipe.instructions}</p>
         </div>
