@@ -10,6 +10,7 @@ const PORT = 3000;
 //middleware
 //functions that run on every request before it reaches your routes
 app.use(cors()); //allowes server to communicate with browser
+// allows data to be sent with request like req.body
 app.use(express.json()); //parses json in request bodies into a javascript obeject
 
 //fake recipe data
@@ -53,3 +54,36 @@ app.listen(PORT, () => {
 console.log('Server running on http://localhost:${PORT}')
 })
 
+//create a new recipe
+app.post('/recipes', (req,res)=>{
+    const newRecipe = {
+        id: recipes.length +1,
+        title : req.body.title,
+        // req.body means data sent along with the request
+        ingridients :req.body.ingridients,
+        instructions: req.body.instructions
+    };
+    recipes.push(newRecipe);
+    res.status(201).json(newRecipe) //201 - successful post
+});
+
+//update and existing route
+app.put('/recipes/:id', (req,res) =>{
+    const recipe = recipes.find(r => r.id ===parseInt(req.params.id));
+    if(!recipe) return res.status(404).json({error: "Recipe not found"});
+    
+    //?? - nullish coalesching operator - uses left value unless its null or undefined
+    recipe.title = req.body.title ?? recipe.title; // req.body is parsed by json
+    recipe.ingredients = req.body.ingredients ?? recipe.ingredients;
+    recipe.instructions = req.body.instructions ?? recipe.instructions;
+
+    res.json(recipe);
+});
+
+app.delete('/recipes/:id', (req,res) =>{
+    const index = recipes.findIndex(r=> r.id === parseInt(req.params.id));
+    if(index ===-1) return res.status(404).json({error: "Recipe not found"});
+
+    recipes.splice(index,1);
+    res.status(204).send();
+});
