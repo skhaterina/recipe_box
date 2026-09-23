@@ -43,6 +43,18 @@ form{
   box-shadow:  0 2px 8px rgba(0,0,0,0,1);
   margin-bottom: 24px;
 }
+
+/* > means that div child of a form */
+form > div{
+  display:flex;
+  /* turns each label/input into a horiztonal flex row */
+  align-items: center;   
+  gap: 8px;
+}
+form label {
+  width: 220px;
+  text-align: right;
+}
 input,textarea{
   padding: 8px;
   border : 1px solid #ccc;
