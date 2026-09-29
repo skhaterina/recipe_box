@@ -24,7 +24,7 @@ A full-stack web application for saving, organizing, and browsing your favorite 
 - **Database:** SQLite (via `better-sqlite3`)
 
 ## Architecture
-
+'''
 The backend follows a layered structure to separate concerns:
 server/
 ├── config/
@@ -35,7 +35,8 @@ server/
 │ └── recipesRoutes.js # URL/method → controller mapping
 └── index.js # Server setup and middleware
 The frontend is split into focused, reusable components:
-
+'''
+'''
 client/src/
 ├── App.jsx # Top-level state and data flow
 ├── components/
@@ -43,7 +44,7 @@ client/src/
 │ ├── RecipeCard.jsx # Single recipe display + inline editing
 │ └── RecipeList.jsx # Renders a list of RecipeCards
 
-
+'''
 ## Getting Started
 
 ### Prerequisites
