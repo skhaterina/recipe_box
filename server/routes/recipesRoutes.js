@@ -5,6 +5,7 @@
 
 const express = require('express');
 const router = express.Router(); // A mini, self-contained version of `app`, just for these routes
+const validateRecipe = require('../middleware/validateRecipe'); 
 
 const {
   getAllRecipes,
@@ -14,13 +15,15 @@ const {
   deleteRecipe
 } = require('../controllers/recipesController');
 
-// Note: paths here do NOT include "/recipes" - that prefix gets added once,
-// where this router is mounted in index.js (app.use('/recipes', recipesRoutes))
-router.get('/', getAllRecipes);       // GET    /recipes
-router.get('/:id', getRecipeById);    // GET    /recipes/:id
-router.post('/', createRecipe);       // POST   /recipes
-router.put('/:id', updateRecipe);     // PUT    /recipes/:id
-router.delete('/:id', deleteRecipe);  // DELETE /recipes/:id
+router.get('/', getAllRecipes);
+router.get('/:id', getRecipeById);
 
-// Export this configured router so index.js can mount it onto the main app
+// Notice validateRecipe is placed BEFORE the controller function.
+// Express runs middleware in the order listed - validation happens first,
+// and only calls the controller if it passes.
+router.post('/', validateRecipe, createRecipe);
+router.put('/:id', validateRecipe, updateRecipe);
+
+router.delete('/:id', deleteRecipe);
+
 module.exports = router;
