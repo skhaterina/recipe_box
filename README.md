@@ -78,7 +78,7 @@ Start the backend (from the `server` folder):
 ```bash
 node index.js
 ```
-Server runs on `http://localhost:3000`
+The server runs on `http://localhost:3000`
 
 Start the frontend (from the `client` folder):
 ```bash
@@ -99,10 +99,10 @@ App runs on `http://localhost:5173` (or the next available port)
 ## Roadmap
 
 - [x] Add create/edit/delete functionality
-- [x] Add a real database (SQLite)
-- [x] Restructure backend into routes/controllers/config layers
-- [ ] Add input validation and centralized error handling
-- [ ] Move hardcoded URLs into environment variables
+- [x] Add a real database (SQLite) (finished Oct 1,26)
+- [x] Restructure backend into routes/controllers/config layers (finished Oct 2, 26)
+- [x] Add input validation and centralized error handling (finished Oct 2, 26)
+- [x] Move hardcoded URLs into environment variables
 - [ ] Add user authentication
 - [ ] Deploy live (Vercel + Railway/Render)
 - [ ] Add search/filter by ingredient or tag
