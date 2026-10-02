@@ -8,27 +8,27 @@ function App() {
   const [recipes, setRecipes] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:3000/recipes')
-      .then(res => res.json())
-      .then(data => setRecipes(data))
-      .catch(err => console.error('Error fetching recipes:', err));
-  }, []);
+  fetch(`${import.meta.env.VITE_API_URL}/recipes`)
+    .then(res => res.json())
+    .then(data => setRecipes(data))
+    .catch(err => console.error('Error fetching recipes:', err));
+}, []);
 
-  function handleAddRecipe(newRecipe) {
-    fetch('http://localhost:3000/recipes', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(newRecipe)
+ function handleAddRecipe(newRecipe) {
+  fetch(`${import.meta.env.VITE_API_URL}/recipes`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(newRecipe)
+  })
+    .then(res => res.json())
+    .then(createdRecipe => {
+      setRecipes([...recipes, createdRecipe]);
     })
-      .then(res => res.json())
-      .then(createdRecipe => {
-        setRecipes([...recipes, createdRecipe]);
-      })
-      .catch(err => console.error('Error creating recipe:', err));
-  }
+    .catch(err => console.error('Error creating recipe:', err));
+}
 
   function handleDelete(id) {
-    fetch(`http://localhost:3000/recipes/${id}`, {
+    fetch(`${import.meta.env.VITE_API_URL}/recipes/${id}`, {
       method: 'DELETE'
     })
       .then(() => {
@@ -38,7 +38,7 @@ function App() {
   }
 
   function handleUpdate(id, updatedRecipe) {
-    fetch(`http://localhost:3000/recipes/${id}`, {
+    fetch(`${import.meta.env.VITE_API_URL}/recipes/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(updatedRecipe)

@@ -2,15 +2,19 @@
 // This is the server's entry point.
 // Its only job is to configure Express (middleware, mounted routes)
 // and start listening for requests - no route logic lives here anymore.
+require('dotenv').config();// Load variables from .env into process.env - must happen before anything that uses them
 
 const express = require('express');
 const cors = require('cors');
+const helmet = require('helmet')
 const recipesRoutes = require('./routes/recipesRoutes');
 const errorHandler = require('./middleware/errorHandler');
 
 
+
 const app = express();
-const PORT = 3000;
+// Use the PORT from .env if set, otherwise fall back to 3000
+const PORT = process.env.PORT || 3000;
 
 // helmet() sets a collection of HTTP response headers that guard against
 // several common web vulnerabilities (e.g. preventing the browser from
