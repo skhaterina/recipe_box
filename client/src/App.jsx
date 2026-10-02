@@ -54,7 +54,10 @@ function App() {
 
   return (
     <div className="app-container">
-      <h1>My Recipe Box</h1>
+      <header className="box-header">
+      <div className="box-tab">My Recipe Box</div>
+      <p className="box-subtitle">A running list of what's worth repeating.</p>
+      </header>
       <RecipeForm onAddRecipe={handleAddRecipe} />
       <hr />
       <RecipeList

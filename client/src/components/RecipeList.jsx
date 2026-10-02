@@ -3,7 +3,7 @@ import RecipeCard from './RecipeCard';
 
 function RecipeList({ recipes, onDelete, onUpdate }) {
   return (
-    <>
+    <div className="recipe-grid">
       {recipes.map(recipe => (
         <RecipeCard
           key={recipe.id}
@@ -12,7 +12,7 @@ function RecipeList({ recipes, onDelete, onUpdate }) {
           onUpdate={onUpdate}
         />
       ))}
-    </>
+    </div>
   );
 }
 
